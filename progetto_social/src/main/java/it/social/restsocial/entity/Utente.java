@@ -1,6 +1,7 @@
 package it.social.restsocial.entity;
 
 public class Utente {
+	private String nome;
 	private
 
 }
