@@ -15,7 +15,7 @@ public class CommentoFormDto {
     @NotNull(message = "L'utente è obbligatorio")
 	private UtenteDto utente;
 	
-    @NotNull(message = "Il contenuto non può essere vuoto")
+    @NotNull(message = "La data è obbligatoria")
 	private LocalDateTime dataOra;
 	
     @NotBlank(message = "Il testo non può essere vuoto")
@@ -23,13 +23,6 @@ public class CommentoFormDto {
 	
 	public CommentoFormDto() {}
 	
-	public CommentoFormDto(Long id, PostDto post, UtenteDto utente, LocalDateTime dataOra, String testo) {
-		this.id = id;
-		this.post = post;
-		this.utente = utente;
-		this.dataOra = dataOra;
-		this.testo = testo;
-	}
 
 	public Long getId() {
 		return id;

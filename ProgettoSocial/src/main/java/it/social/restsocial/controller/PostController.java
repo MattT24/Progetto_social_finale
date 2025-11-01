@@ -39,8 +39,8 @@ public class PostController {
 	 
 	 @PutMapping
 	 @PreAuthorize("hasAuthority('POST_UPDATE')")
-	 public ResponseEntity<PostDto> update (@Valid @RequestBody PostFormDto dto) {
-		 var updated = service.update(dto);
+	 public ResponseEntity<PostDto> updateMyPost (@Valid @RequestBody PostFormDto dto) {
+		 var updated = service.updateMyPost(dto);
 		 return ResponseEntity.status(201).body(updated);
 	 }
 	 

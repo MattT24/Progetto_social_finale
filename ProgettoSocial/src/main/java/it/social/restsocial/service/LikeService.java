@@ -51,10 +51,10 @@ public class LikeService {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    Utente u = utenteRepo.findByEmail(email)
 	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+	    if (id == null) throw new RuntimeException("Id like è obbligatorio per il delete");
 	    Optional<Like> opt = repo.findById(id);
 	    Like l = opt.get();
-	    if (u != l.getUtente()) throw new RuntimeException("L'utente non possiede il post");
-        if (id == null) throw new RuntimeException("Id post è obbligatorio per il delete");
+	    if (u != l.getUtente()) throw new RuntimeException("L'utente non possiede il like");
 		repo.deleteById(id);
 	}
 	
@@ -65,7 +65,7 @@ public class LikeService {
 		return PageResponse.from(repo.findByPostId(postId, pageable).map(DtoMapper::toLikeDtoLight));
 	}
 	@Transactional
-	public PageResponse<LikeDto> allPostByLike(Pageable pageable) {
+	public PageResponse<LikeDto> allPostByMyLike(Pageable pageable) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    Utente u = utenteRepo.findByEmail(email)
 	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));

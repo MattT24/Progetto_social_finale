@@ -46,15 +46,6 @@ public class Commento {
 
     public Commento() {}
     
-	public Commento(Post post, Utente utente, LocalDateTime dataOra, String testo, Instant createdAt,
-			Instant updatedAt) {
-		this.post = post;
-		this.utente = utente;
-		this.dataOra = dataOra;
-		this.testo = testo;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
 
 	public Long getId() {
 		return id;

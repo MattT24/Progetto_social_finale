@@ -53,6 +53,6 @@ public class LikeController {
 	 @GetMapping("/my")
 	 @PreAuthorize("hasAuthority('LIKE_READ')")
 	 public PageResponse<LikeDto> getMyLikedPost(Pageable pageable){
-		 return service.allPostByLike(pageable);
+		 return service.allPostByMyLike(pageable);
 	 }
 }

@@ -39,7 +39,7 @@ public class PostService {
 		return DtoMapper.toPostDto(repo.save(p));
 	}
 	@Transactional
-	public PostDto update(@Valid PostFormDto form) {
+	public PostDto updateMyPost(@Valid PostFormDto form) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    Utente u = utenteRepo.findByEmail(email)
 	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
@@ -61,10 +61,10 @@ public class PostService {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    Utente u = utenteRepo.findByEmail(email)
 	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+	    if (id == null) throw new RuntimeException("Id post è obbligatorio per il delete");
 	    Optional<Post> opt = repo.findById(id);
 	    Post p = opt.get();
 	    if (u != p.getUtente()) throw new RuntimeException("L'utente non possiede il post");
-        if (id == null) throw new RuntimeException("Id post è obbligatorio per il delete");
 		repo.deleteById(id);
 	}
 	@Transactional(readOnly = true)

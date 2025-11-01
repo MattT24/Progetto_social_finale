@@ -45,13 +45,17 @@ public class RuoloPermesso {
 
     // === Costruttori ===
     public RuoloPermesso() {}
+    
+    
+
 
     public RuoloPermesso(Ruolo ruolo, Permesso permesso) {
-        this.ruolo = ruolo;
-        this.permesso = permesso;
-    }
+		this.ruolo = ruolo;
+		this.permesso = permesso;
+	}
 
-    // === Getter & Setter ===
+
+	// === Getter & Setter ===
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
