@@ -46,8 +46,8 @@ public class LikeController {
 	 
 	 @GetMapping("/post")
 	 @PreAuthorize("hasAuthority('LIKE_READ')")
-	 public PageResponse<LikeDto> allLikeByPost(@RequestParam Long postId, Pageable pageable){  //List o PageResponse o Responseentity?
-		 return service.allLikeByPost(postId, pageable);
+	 public PageResponse<LikeDto> allLikeByPost(@RequestBody IdRequest req, Pageable pageable){  //List o PageResponse o Responseentity?
+		 return service.allLikeByPost(req.getId(), pageable);
 	 }
 	 
 	 @GetMapping("/my")

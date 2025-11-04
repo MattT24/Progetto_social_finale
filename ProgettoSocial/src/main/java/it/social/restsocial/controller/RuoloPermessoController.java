@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import it.social.restsocial.dto.IdRequest;
 import it.social.restsocial.dto.PermessoDto;
 import it.social.restsocial.dto.RuoloDto;
 import it.social.restsocial.dto.RuoloPermessoRequest;
@@ -27,10 +28,10 @@ public class RuoloPermessoController {
     @Autowired private RuoloPermessoService service;
 
     /** Restituisce tutti i permessi di un ruolo (non paginato). */
-    @GetMapping("/ruolo/{ruoloId}")
+    @GetMapping("/ruolo")
     @PreAuthorize("hasAuthority('RUOLO_READ')")
-    public List<PermessoDto> listByRuolo(@PathVariable Long ruoloId) {
-        return service.listPermessiByRuolo(ruoloId);
+    public List<PermessoDto> listByRuolo(@RequestBody IdRequest req) {
+        return service.listPermessiByRuolo(req.getId());
     }
 
     /** Crea l'associazione ruolo-permesso. */

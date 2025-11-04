@@ -53,6 +53,8 @@ public class Post {
     
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> like = new ArrayList<>();
+    
+    private String imagePath;
 
 	public Post() {}
 
@@ -121,5 +123,15 @@ public class Post {
 		this.like = like;
 	}
 
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	
+
 }
