@@ -49,10 +49,10 @@ public class RuoloController {
     }
 
     /** Dettaglio ruolo. */
-    @GetMapping("/{id}")
+    @GetMapping("/byId")
     @PreAuthorize("hasAuthority('RUOLO_READ')")
-    public ResponseEntity<RuoloDto> get(@PathVariable Long id) {
-    	var dto = service.getById(id);
+    public ResponseEntity<RuoloDto> get(@RequestBody IdRequest req) {
+    	var dto = service.getById(req.getId());
         return (dto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(dto);
     }
 

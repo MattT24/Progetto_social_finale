@@ -48,21 +48,16 @@ public class Post {
     @Column(name = "updated_at")
     private Instant updatedAt;
     
-    @OneToMany(mappedBy = "post", cascade = CascadeType.PERSIST, orphanRemoval = false, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Commento> commenti = new ArrayList<>();
     
-    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> like = new ArrayList<>();
+    
+    private String imagePath;
 
 	public Post() {}
 
-	public Post(Utente utente, LocalDateTime dataOra, String contenuto, Instant createdAt, Instant updatedAt) {
-		this.utente = utente;
-		this.dataOra = dataOra;
-		this.contenuto = contenuto;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
 
 	public Long getId() {
 		return id;
@@ -128,5 +123,15 @@ public class Post {
 		this.like = like;
 	}
 
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	
+
 }

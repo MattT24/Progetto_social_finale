@@ -57,10 +57,10 @@ public class CommentoService {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 	    Utente u = utenteRepo.findByEmail(email)
 	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+	    if (id == null) throw new RuntimeException("Id commento è obbligatorio per il delete");
 	    Optional<Commento> opt = repo.findById(id);
 	    Commento c = opt.get();
-	    if (u != c.getUtente()) throw new RuntimeException("L'utente non possiede il post");
-        if (id == null) throw new RuntimeException("Id post è obbligatorio per il delete");
+	    if (u != c.getUtente()) throw new RuntimeException("L'utente non possiede il commento");
 		repo.deleteById(id);
 	}
 	@Transactional(readOnly = true)

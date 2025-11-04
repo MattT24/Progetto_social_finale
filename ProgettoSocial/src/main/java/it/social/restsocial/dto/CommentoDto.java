@@ -16,17 +16,6 @@ public class CommentoDto {
 	
 	public CommentoDto() {}
 	
-	public CommentoDto(Long id, PostDto post, UtenteDto utente, LocalDateTime dataOra, String testo, Instant createdAt,
-			Instant updatedAt) {
-		super();
-		this.id = id;
-		this.post = post;
-		this.utente = utente;
-		this.dataOra = dataOra;
-		this.testo = testo;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
 	public Long getId() {
 		return id;
 	}

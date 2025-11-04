@@ -39,8 +39,8 @@ public class PostController {
 	 
 	 @PutMapping
 	 @PreAuthorize("hasAuthority('POST_UPDATE')")
-	 public ResponseEntity<PostDto> update (@Valid @RequestBody PostFormDto dto) {
-		 var updated = service.update(dto);
+	 public ResponseEntity<PostDto> updateMyPost (@Valid @RequestBody PostFormDto dto) {
+		 var updated = service.updateMyPost(dto);
 		 return ResponseEntity.status(201).body(updated);
 	 }
 	 
@@ -63,10 +63,10 @@ public class PostController {
 		 return service.listAll(pageable);
 	 }
 	 
-	 @GetMapping("/{id}/utente")
+	 @GetMapping("/post_utente")
 	 @PreAuthorize("hasAuthority('POST_READ')")
-	 public PageResponse<PostDto> allPostByUtente(@Valid @PathVariable("id") Long utenteId, Pageable pageable){ //Utente o id?
-		 return service.allPostByUtente(utenteId, pageable); 
+	 public PageResponse<PostDto> allPostByUtente(@Valid @RequestBody IdRequest req, Pageable pageable){ //Utente o id?
+		 return service.allPostByUtente(req.getId(), pageable); 
 	 }
 	 @GetMapping("/miei")
 	 @PreAuthorize("hasAuthority('POST_READ')")
@@ -74,10 +74,10 @@ public class PostController {
 		 return service.allMyPost(pageable); 
 	 }
 	 
-	 @GetMapping("/{id}")
+	 @GetMapping("/byId")
 	 @PreAuthorize("hasAuthority('POST_READ')")
-	 public ResponseEntity<PostDto> postById(@PathVariable Long id) {
-		 var dto = service.postById(id);
+	 public ResponseEntity<PostDto> postById(@RequestBody IdRequest req) {
+		 var dto = service.postById(req.getId());
 		 return (dto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(dto);
 	 }
 	 

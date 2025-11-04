@@ -56,10 +56,10 @@ public class UtenteController {
     //Sospendi utente
     
     /** Dettaglio utente. */
-    @GetMapping("/{id}")
+    @GetMapping("/byId")
     @PreAuthorize("hasAuthority('UTENTE_READ')")
-    public ResponseEntity<UtenteDto> get(@PathVariable Long id) {
-    	var dto = service.getById(id);
+    public ResponseEntity<UtenteDto> get(@RequestBody IdRequest req) {
+    	var dto = service.getById(req.getId());
     	return (dto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(dto);
     }
 

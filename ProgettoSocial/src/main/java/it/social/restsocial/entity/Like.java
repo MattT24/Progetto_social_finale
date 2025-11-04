@@ -46,15 +46,6 @@ public class Like {
     
     public Like() {}
 
-
-	public Like(Utente utente, Post post, LocalDateTime dataOra, Instant createdAt, Instant updatedAt) {
-		this.utente = utente;
-		this.post = post;
-		this.dataOra = dataOra;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
 	public Long getId() {
 		return id;
 	}
