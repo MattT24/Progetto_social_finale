@@ -15,6 +15,7 @@ import it.social.restsocial.service.AuthService;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+	private String Prova;
 
     @Autowired private AuthService authService;
 
