@@ -23,8 +23,6 @@ public class CommentoService {
 	@Autowired private CommentoRepository repo;
 	@Autowired private UtenteRepository utenteRepo;
 	
-	/*ciao*/
-	
 	@Transactional
 	public CommentoDto create(@Valid CommentoFormDto form) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
