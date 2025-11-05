@@ -63,10 +63,10 @@ public class UtenteService {
     public void delete(Long id) { repo.deleteById(id); }
     
     public void deleteMyProfile() {
-    	String email = SecurityContextHolder.getContext().getAuthentication().getName();
-    	Utente u = repo.findByEmail(email)
-    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
-    	repo.delete(u);
+	    	String email = SecurityContextHolder.getContext().getAuthentication().getName();
+	    	Utente u = repo.findByEmail(email)
+	    			.orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+	    	repo.delete(u);
     }
     
     /** Dettaglio utente. (Ruolo light) */

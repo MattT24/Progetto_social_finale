@@ -80,7 +80,7 @@ public class RuoloService {
         Ruolo r = optR.get();
         Optional<Utente> optU = utenteRepo.findById(req.getUtenteId());
         Utente u = optU.get();
-    	u.setRuolo(r); 
+        u.setRuolo(r); 
         utenteRepo.save(u);
         return DtoMapper.toUtenteDto(u); 
     }

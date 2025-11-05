@@ -58,14 +58,14 @@ public class CommentoController {
 	 
 	 @GetMapping
 	 @PreAuthorize("hasAuthority('COMMENTO_READ')")
-	 public PageResponse<CommentoDto> allCommentiByPost(@RequestParam Long id, Pageable pageable){  //Post o id?
-		 return service.allCommentiByPost(id, pageable);
+	 public PageResponse<CommentoDto> allCommentiByPost(@RequestBody IdRequest req, Pageable pageable){  //Post o id?
+		 return service.allCommentiByPost(req.getId(), pageable);
 	 }
 	 
 	 @GetMapping("/utente")
 	 @PreAuthorize("hasAuthority('COMMENTO_READ')")
-	 public PageResponse<CommentoDto> allCommentoByUtente(@RequestParam Long id, Pageable pageable){ //Utente o id?
-		 return service.allCommentiByUtente(id, pageable); 
+	 public PageResponse<CommentoDto> allCommentoByUtente(@RequestBody IdRequest req, Pageable pageable){ //Utente o id?
+		 return service.allCommentiByUtente(req.getId(), pageable); 
 	 }
 	 @GetMapping("/miei")
 	 @PreAuthorize("hasAuthority('COMMENTO_READ')")
@@ -75,8 +75,8 @@ public class CommentoController {
 	 
 	 @GetMapping("/id")
 	 @PreAuthorize("hasAuthority('COMMENTO_READ')")
-	 public ResponseEntity<CommentoDto> commentoById(@RequestParam Long id) {
-		 var dto = service.commentoById(id);
+	 public ResponseEntity<CommentoDto> commentoById(@RequestBody IdRequest req) {
+		 var dto = service.commentoById(req.getId());
 		 return (dto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(dto);
 	 }
 

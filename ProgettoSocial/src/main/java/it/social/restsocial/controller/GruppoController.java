@@ -48,11 +48,11 @@ public class GruppoController {
     }
 
     /** Dettaglio gruppo (withPermessi=true include i permessi). */
-    @GetMapping("/{id}")
+    @GetMapping("/byId")
     @PreAuthorize("hasAuthority('GRUPPO_READ')")
-    public ResponseEntity<GruppoDto> get(@PathVariable Long id,
+    public ResponseEntity<GruppoDto> get(@RequestBody IdRequest req,
                          @RequestParam(defaultValue = "false") boolean withPermessi) {
-    	var dto = service.getById(id, withPermessi);
+    	var dto = service.getById(req.getId(), withPermessi);
         return (dto == null) ? ResponseEntity.notFound().build() : ResponseEntity.ok(dto);
     }
 
