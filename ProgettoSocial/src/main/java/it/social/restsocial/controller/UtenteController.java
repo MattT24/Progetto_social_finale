@@ -23,6 +23,7 @@ public class UtenteController {
 
     @Autowired private UtenteService service;
 
+    //ciao test
     /** Crea utente. */
     @PostMapping
     @PreAuthorize("hasAuthority('UTENTE_CREATE')")
