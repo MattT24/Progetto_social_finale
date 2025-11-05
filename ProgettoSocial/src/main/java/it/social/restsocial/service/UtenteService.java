@@ -27,7 +27,7 @@ public class UtenteService {
     @Autowired private RuoloRepository ruoloRepo;
     @Autowired private PasswordEncoder encoder;
 
-    /*lolo*/
+    
 
     @Transactional
     public UtenteDto create(UtenteFormDto form) {
