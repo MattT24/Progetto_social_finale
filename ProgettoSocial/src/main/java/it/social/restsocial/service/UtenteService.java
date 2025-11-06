@@ -119,6 +119,7 @@ public class UtenteService {
     }
     
     public UtenteDto updateMyProfile(UtenteFormDto form) {
+    	// controllo token
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
         Utente u = repo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
