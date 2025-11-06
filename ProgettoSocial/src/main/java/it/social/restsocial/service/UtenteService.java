@@ -117,4 +117,20 @@ public class UtenteService {
                 .orElseThrow(() -> new RuntimeException("Ruolo non trovato"));
         u.setRuolo(ruolo);
     }
+    
+    public UtenteDto updateMyProfile(UtenteFormDto form) {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Utente u = repo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+        
+        u.setNome(form.getNome());
+        u.setCognome(form.getCognome());
+        u.setCodiceFiscale(form.getCodiceFiscale());
+        u.setEmail(form.getEmail());
+        u.setDataNascita(form.getDataNascita());
+        u.setTelefono(form.getTelefono());
+        u.setIndirizzo(form.getIndirizzo());
+        
+        return DtoMapper.toUtenteDto(repo.save(u));
+    }
 }
