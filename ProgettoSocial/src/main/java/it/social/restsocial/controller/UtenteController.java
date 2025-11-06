@@ -86,4 +86,11 @@ public class UtenteController {
     }
     
     //si potrebbe fare una nuova entità con il numero di like
+    @PutMapping("/myprofile")
+    @PreAuthorize("hasAuthority('UTENTE_PROFILE')")
+    public ResponseEntity<UtenteDto> updateMyProfile(@Valid @RequestBody UtenteFormDto form){
+    	
+    	var updated = service.updateMyProfile(form);
+    	return ResponseEntity.status(201).body(updated);
+    } 
 }
