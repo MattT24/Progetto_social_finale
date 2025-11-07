@@ -8,14 +8,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 import it.social.restsocial.dto.GruppoDto;
 import it.social.restsocial.dto.LoginRequest;
 import it.social.restsocial.dto.LoginResponse;
 import it.social.restsocial.dto.PermessoDto;
 import it.social.restsocial.dto.RegisterRequest;
+import it.social.restsocial.dto.ResetPasswordDto;
 import it.social.restsocial.dto.RuoloDto;
+import it.social.restsocial.dto.UtenteDto;
 import it.social.restsocial.entity.Utente;
 import it.social.restsocial.mapper.DtoMapper;
 import it.social.restsocial.repository.RuoloRepository;
@@ -120,5 +122,19 @@ public class AuthService {
         u.setRuolo(ruoloUser);
 
         return utenteRepository.save(u);
+    }
+    
+    public UtenteDto updateMyPassword(@Valid ResetPasswordDto dto) {    	
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Utente utente = utenteRepository.findByEmail(dto.getEmail())
+                .orElseThrow(() -> new RuntimeException("Utente non trovato con email: " + dto.getEmail()));
+       
+        if (!dto.getPassword().equals(dto.getConfermaPassword())) {
+            throw new RuntimeException("Le password inserite non coincidono");
+        }
+       
+        utente.setPassword(passwordEncoder.encode(dto.getPassword()));     
+        Utente updated = utenteRepository.save(utente);
+        return DtoMapper.toUtenteDto(updated);
     }
 }
