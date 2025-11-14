@@ -36,6 +36,9 @@ public class Utente {
 
     private String telefono;
     private String indirizzo;
+    
+    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<DomandaUtente> domande = new ArrayList<>();
 
     /** Ruolo assegnato all'utente. */
     @ManyToOne
