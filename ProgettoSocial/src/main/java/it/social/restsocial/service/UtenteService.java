@@ -27,6 +27,7 @@ public class UtenteService {
     @Autowired private RuoloRepository ruoloRepo;
     @Autowired private PasswordEncoder encoder;
 
+    /*lolo*/
 
     @Transactional
     public UtenteDto create(UtenteFormDto form) {
@@ -115,5 +116,22 @@ public class UtenteService {
         Ruolo ruolo = ruoloRepo.findById(form.getRuolo().getId())
                 .orElseThrow(() -> new RuntimeException("Ruolo non trovato"));
         u.setRuolo(ruolo);
+    }
+    
+    public UtenteDto updateMyProfile(UtenteFormDto form) {
+    	// controllo token
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Utente u = repo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utente corrente non trovato"));
+        
+        u.setNome(form.getNome());
+        u.setCognome(form.getCognome());
+        u.setCodiceFiscale(form.getCodiceFiscale());
+        u.setEmail(form.getEmail());
+        u.setDataNascita(form.getDataNascita());
+        u.setTelefono(form.getTelefono());
+        u.setIndirizzo(form.getIndirizzo());
+        
+        return DtoMapper.toUtenteDto(repo.save(u));
     }
 }

@@ -3,9 +3,12 @@ package it.social.restsocial.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import it.social.restsocial.dto.RegisterRequest;
+import it.social.restsocial.dto.ResetPasswordDto;
+import it.social.restsocial.dto.UtenteDto;
 import it.social.restsocial.dto.LoginRequest;
 import it.social.restsocial.dto.LoginResponse;
 import it.social.restsocial.service.AuthService;
